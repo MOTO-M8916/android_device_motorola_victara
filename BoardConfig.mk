@@ -9,11 +9,11 @@ TARGET_CPU_SMP := true
 TARGET_CPU_VARIANT := krait
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
-ARCH_ARM_HAVE_TLS_REGISTER := true
+#ARCH_ARM_HAVE_TLS_REGISTER := true
+
+PLATFORM_SECURITY_PATCH := 2029-10-01
 
 # Krait optimizations
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
 TARGET_USE_KRAIT_PLD_SET := true
 TARGET_KRAIT_BIONIC_PLDOFFS := 10
@@ -21,23 +21,30 @@ TARGET_KRAIT_BIONIC_PLDTHRESH := 10
 TARGET_KRAIT_BIONIC_BBTHRESH := 64
 TARGET_KRAIT_BIONIC_PLDSIZE := 64
 
+# Binder API version
+TARGET_USES_64_BIT_BINDER := true
+
 # Bootly stuff
 TARGET_NO_BOOTLOADER := true
-TARGET_BOOTLOADER_BOARD_NAME := victara
+TARGET_BOOTLOADER_BOARD_NAME := MSM8974
 
-# Prebuilts
-TARGET_PREBUILT_KERNEL := device/motorola/victara/zImage
-TARGET_PREBUILT_DTB := device/motorola/victara/dtb.img
-# else uncomment below to build from sauce
-# TARGET_KERNEL_SOURCE := kernel/motorola/victara
-# TARGET_KERNEL_CONFIG := twrp_victara_defconfig
-
-# More bootly stuff
-BOARD_CUSTOM_BOOTIMG_MK := device/motorola/victara/bootimg.mk
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom androidboot.selinux=permissive androidboot.bootdevice=msm_sdcc.1 msm_rtb.filter=0x37 ehci-hcd.park=3 vmalloc=400M utags.blkdev=/dev/block/platform/msm_sdcc.1/by-name/utags
+# Kernel
+BOARD_CUSTOM_BOOTIMG := true
 BOARD_KERNEL_BASE := 0x80200000
+BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=qcom msm_rtb.filter=0x37 ehci-hcd.park=3 vmalloc=400M
+BOARD_KERNEL_IMAGE_NAME := zImage
+BOARD_KERNEL_LZ4C_DT := true
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x02000000 --second_offset 0x00f00000 --tags_offset 0x01e00000
+BOARD_KERNEL_SEPARATED_DT := true
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000 --dt device/motorola/victara/dtb.img
+LZMA_RAMDISK_TARGETS := recovery
+
+#BOARD_CUSTOM_BOOTIMG_MK := device/motorola/victara/bootimg.mk
+TARGET_PREBUILT_KERNEL := device/motorola/victara/zImage
+#TARGET_PREBUILT_DTB := device/motorola/victara/dtb.img
+
+#TARGET_KERNEL_CONFIG := lineageos_victara_defconfig
+#TARGET_KERNEL_SOURCE := kernel/motorola/msm8974
 
 # Storage
 BOARD_BOOTIMAGE_PARTITION_SIZE := 14485760
@@ -57,7 +64,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
-TARGET_KEYMASTER_WAIT_FOR_QSEE := true
+TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
 
 # TWRP
 TW_THEME := portrait_hdpi
