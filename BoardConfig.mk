@@ -3,23 +3,12 @@ TARGET_BOARD_PLATFORM := msm8974
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno330
 
 # Architecture
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
-TARGET_CPU_VARIANT := krait
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
-#ARCH_ARM_HAVE_TLS_REGISTER := true
-
-PLATFORM_SECURITY_PATCH := 2029-10-01
-
-# Krait optimizations
-TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
-TARGET_USE_KRAIT_PLD_SET := true
-TARGET_KRAIT_BIONIC_PLDOFFS := 10
-TARGET_KRAIT_BIONIC_PLDTHRESH := 10
-TARGET_KRAIT_BIONIC_BBTHRESH := 64
-TARGET_KRAIT_BIONIC_PLDSIZE := 64
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_VARIANT := generic
+TARGET_CPU_VARIANT_RUNTIME := krait
 
 # Binder API version
 TARGET_USES_64_BIT_BINDER := true
@@ -29,22 +18,18 @@ TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
 
 # Kernel
-BOARD_CUSTOM_BOOTIMG := true
 BOARD_KERNEL_BASE := 0x80200000
-BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=qcom msm_rtb.filter=0x37 ehci-hcd.park=3 vmalloc=400M
+BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=qcom msm_rtb.filter=0x37 ehci-hcd.park=3 vmalloc=400M androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_LZ4C_DT := true
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000 --dt device/motorola/victara/dtb.img
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 LZMA_RAMDISK_TARGETS := recovery
-
-#BOARD_CUSTOM_BOOTIMG_MK := device/motorola/victara/bootimg.mk
-TARGET_PREBUILT_KERNEL := device/motorola/victara/zImage
-#TARGET_PREBUILT_DTB := device/motorola/victara/dtb.img
-
-#TARGET_KERNEL_CONFIG := lineageos_victara_defconfig
-#TARGET_KERNEL_SOURCE := kernel/motorola/msm8974
+TARGET_KERNEL_CONFIG := lineageos_victara_defconfig
+TARGET_KERNEL_SOURCE := kernel/motorola/msm8974
+BOARD_CUSTOM_BOOTIMG_MK := device/motorola/victara/bootimg.mk
+TARGET_PREBUILT_DTB := device/motorola/victara/dtb.img
 
 # Storage
 BOARD_BOOTIMAGE_PARTITION_SIZE := 14485760
@@ -62,16 +47,8 @@ TARGET_USERIMAGES_USE_F2FS := true
 # Misc
 BOARD_HAS_NO_SELECT_BUTTON := true
 
-# Encryption
-TARGET_HW_DISK_ENCRYPTION := true
-TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
-
 # TWRP
-TW_THEME := portrait_hdpi
-TW_NO_USB_STORAGE := true
-TW_INCLUDE_CRYPTO := true
-TARGET_RECOVERY_QCOM_RTC_FIX := true
 RECOVERY_SDCARD_ON_DATA := true
-TW_SCREEN_BLANK_ON_BOOT := true
-TW_NO_EXFAT_FUSE := true # Enabled as kernel driver instead
-TW_EXCLUDE_SUPERSU := true # No love for the wicked
+PTERO_GRAPHICS_NEW_ION_HEAP := true
+TARGET_RECOVERY_FORCE_PIXEL_FORMAT := RGB_565
+RECOVERY_GRAPHICS_FORCE_USE_LINELENGTH := true
