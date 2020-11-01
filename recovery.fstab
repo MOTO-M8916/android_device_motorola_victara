@@ -3,12 +3,16 @@
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
 # Mount point		FS	Device							Flags
-/boot			emmc	/dev/block/platform/msm_sdcc.1/by-name/boot
-/recovery		emmc	/dev/block/platform/msm_sdcc.1/by-name/recovery
-/cache			ext4	/dev/block/platform/msm_sdcc.1/by-name/cache
-/system			ext4	/dev/block/platform/msm_sdcc.1/by-name/system
-/system_image   emmc	/dev/block/platform/msm_sdcc.1/by-name/system		flags=backup=1;flashimg=1
-/data			ext4	/dev/block/platform/msm_sdcc.1/by-name/userdata		flags=encryptable=footer;length=-16384
+/boot		emmc	/dev/block/platform/msm_sdcc.1/by-name/boot
+/system		ext4	/dev/block/platform/msm_sdcc.1/by-name/system
+/data		ext4	/dev/block/platform/msm_sdcc.1/by-name/userdata	flags=length=-16384;encryptable=footer
+/cache		ext4	/dev/block/platform/msm_sdcc.1/by-name/cache
+/recovery	emmc	/dev/block/platform/msm_sdcc.1/by-name/recovery
+/firmware	ext4	/dev/block/platform/msm_sdcc.1/by-name/modem	flags=backup=1;display=Modem;mounttodecrypt
+/efs1		emmc	/dev/block/platform/msm_sdcc.1/by-name/modemst1	flags=backup=1;display=EFS
+/efs2		emmc	/dev/block/platform/msm_sdcc.1/by-name/modemst2	flags=backup=1;subpartitionof=/efs1
+/misc		emmc	/dev/block/platform/msm_sdcc.1/by-name/misc
 
 # External storage
-/sdcard1		vfat	/dev/block/mmcblk1p1 /dev/block/mmcblk1			flags=fsflags=utf8;display=SDcard;storage;wipeingui;removable
+/usb-otg	vfat	/dev/block/sda1 /dev/block/sda			flags=removable;storage;wipeingui;display=USB-OTG
+
