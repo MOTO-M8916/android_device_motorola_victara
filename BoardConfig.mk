@@ -35,7 +35,7 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := generic
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=qcom msm_rtb.filter=0x37 ehci-hcd.park=3 vmalloc=400M androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=qcom androidboot.bootdevice=msm_sdcc.1 msm_rtb.filter=0x37 ehci-hcd.park=3 vmalloc=400M androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80200000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_RAMDISK_OFFSET := 0x02000000
@@ -64,12 +64,11 @@ TARGET_USERIMAGES_USE_F2FS := true
 PLATFORM_SECURITY_PATCH := 2099-12-31
 
 # TWRP Configuration
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
 BOARD_SUPPRESS_SECURE_ERASE := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 TW_THEME := portrait_hdpi
-TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
-TW_NO_HAPTICS := true
 TW_EXCLUDE_TWRPAPP := true
