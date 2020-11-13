@@ -5,7 +5,8 @@
 # Mount point		FS	Device							Flags
 /boot		emmc	/dev/block/platform/msm_sdcc.1/by-name/boot
 /system		ext4	/dev/block/platform/msm_sdcc.1/by-name/system
-/data		ext4	/dev/block/platform/msm_sdcc.1/by-name/userdata	flags=length=-16384;encryptable=footer
+/data           ext4    /dev/block/platform/msm_sdcc.1/by-name/userdata flags=fsflags=rw,discard,nosuid,nodev,noatime,nodiratime,noauto_da_alloc,nobarrier,journal_async_commit,encryptable=footer
+/data           f2fs    /dev/block/platform/msm_sdcc.1/by-name/userdata flags=fsflags=rw,nosuid,nodev,noatime,nodiratime,inline_data,inline_xattr,encryptable=footer,reservedsize=128M
 /cache		ext4	/dev/block/platform/msm_sdcc.1/by-name/cache
 /recovery	emmc	/dev/block/platform/msm_sdcc.1/by-name/recovery
 /firmware	ext4	/dev/block/platform/msm_sdcc.1/by-name/modem	flags=backup=1;display=Modem;mounttodecrypt

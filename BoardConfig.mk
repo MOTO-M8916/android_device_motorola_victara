@@ -23,7 +23,11 @@ ALLOW_MISSING_DEPENDENCIES := true
 # Assert
 TARGET_OTA_ASSERT_DEVICE := victara
 
+# Binder API version
+TARGET_USES_64_BIT_BINDER := true
+
 # Platform
+TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := msm8974
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno330
 
@@ -35,7 +39,8 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := generic
 
 # Kernel
-BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=qcom androidboot.bootdevice=msm_sdcc.1 msm_rtb.filter=0x37 ehci-hcd.park=3 vmalloc=400M androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=none androidboot.hardware=qcom androidboot.bootdevice=msm_sdcc.1
+BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x37 ehci-hcd.park=3 vmalloc=400M androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x80200000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_RAMDISK_OFFSET := 0x02000000
@@ -44,7 +49,8 @@ BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 TARGET_KERNEL_ARCH := arm
 BOARD_KERNEL_IMAGE_NAME := zImage
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/zImage
-BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET) --dt $(DEVICE_PATH)/prebuilt/dt.img
+BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --dt $(DEVICE_PATH)/prebuilt/dt.img
 
 # LZMA
 LZMA_RAMDISK_TARGETS := recovery
@@ -62,18 +68,17 @@ TARGET_USERIMAGES_USE_F2FS := true
 # Prevent anti-rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
 
-# Keymaster
-TARGET_PROVIDES_KEYMASTER := true
-
 # Crypto
 TW_INCLUDE_CRYPTO := true
-TARGET_HW_DISK_ENCRYPTION := true
 
 # TWRP Configuration
+RECOVERY_SDCARD_ON_DATA := true
+TARGET_RECOVERY_QCOM_RTC_FIX := true
 TARGET_RECOVERY_DEVICE_DIRS += $(DEVICE_PATH)
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
 TW_THEME := portrait_hdpi
-TW_EXCLUDE_TWRPAPP := true
+TW_INCLUDE_FUSE_EXFAT := true # exFAT support
+TW_INCLUDE_FUSE_NTFS := true # NTFS support
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
