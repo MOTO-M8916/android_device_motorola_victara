@@ -82,3 +82,8 @@ TW_INCLUDE_FUSE_NTFS := true # NTFS support
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
+
+# TWRP-Logs
+TWRP_INCLUDE_LOGCAT := true
+TARGET_USES_LOGD := true
+
