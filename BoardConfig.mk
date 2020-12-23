@@ -71,20 +71,20 @@ PLATFORM_SECURITY_PATCH := 2099-12-31
 # Crypto
 TW_INCLUDE_CRYPTO := true
 TARGET_HW_DISK_ENCRYPTION := true
+BOARD_USES_QCOM_DECRYPTION := true
+TW_CRYPTO_USE_SYSTEM_VOLD := \
+    hwservicemanager \
+    keymaster-3-0 \
+    qseecomd \
+    servicemanager
 
 # TWRP Configuration
 RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 TARGET_RECOVERY_DEVICE_DIRS += $(DEVICE_PATH)
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
 TW_THEME := portrait_hdpi
-TW_INCLUDE_FUSE_EXFAT := true # exFAT support
-TW_INCLUDE_FUSE_NTFS := true # NTFS support
 TW_SCREEN_BLANK_ON_BOOT := true
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_EXCLUDE_TWRPAPP := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
-
-# TWRP-Logs
-TWRP_INCLUDE_LOGCAT := true
-TARGET_USES_LOGD := true
-
