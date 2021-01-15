@@ -74,6 +74,7 @@ PLATFORM_SECURITY_PATCH := 2099-12-31
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
+TW_CRYPTO_USE_SBIN_VOLD := true
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi
